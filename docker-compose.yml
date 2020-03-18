@@ -1,19 +1,17 @@
 version: "3"
 services:
-    tidal-java-service:
-        container_name: tidal-spring-boot-app
+    web-app-service:
+        container_name: spring-boot-web-app
         build: 
-            context: ./tidal-spring-app
-            args: 
-                - APPLICATION_JAR=**ADD JAR FILE URL HERE**
+            context: ./web-app
         env_file:
-            ./tidal-spring-app/tidal-spring-app.env
-    nginx:
+            ./web-app.env
+    web-server-service:
         image: nginx:alpine
-        container_name: tidal-web-server
+        container_name: web-server
         volumes:
             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
         ports:
             - 8080:80
         depends_on:
-            - tidal-java-service
+            - web-app-service
