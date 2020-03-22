@@ -14,7 +14,7 @@ Clone the project to your host. Navigate to the directory in which you cloned th
     ```
     $ docker-compose up -d
     ```
-3. Run following command to validate application response:
+3. Run following command start and validate application response:
     1. Check container status
         ```
         $ docker-compose ps
@@ -32,3 +32,7 @@ Clone the project to your host. Navigate to the directory in which you cloned th
         ```
         **Expected output**
         `Hello TidalSpringBootApp from Tidal!`
+4. Stop running docker containers
+    ```
+    $ docker-compose down
+    ```
