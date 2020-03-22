@@ -1,11 +1,34 @@
-## containerized-java-application - Docker
+## Containerized Java Application with Nginx
 
-Based on the following conditions, set up a Dockerfile for the Java application downloaded from 
+* **Java Spring Boot application container** uses `oracle/openjdk:8` docker image to build an image to run Java 1.8 and runs and exposes port 80 by default if no port is supplied in SERVER_PORT environment variable
+* **Nginx container** uses `nginx:alpine` docker image and is configured to run on port 80. The application is accessable on port 8080.
 
-* It should use Java 1.8
-* The command to launch the application is: `java -jar gs-spring-boot-0.1.0.jar`
-* The default port should be 80 (use the `SERVER_PORT` environment variable)
-* Expose the default port
-* There should be an environment variable for `NAME` with default `unknown`
-
-Optional: Set up a Docker Compose file that spins up the Java application, with a containerized nginx proxy in front of it.
+### How to get up and running
+Clone the project to your host. Navigate to the directory in which you cloned the project. 
+1. Update the values in `web-app.env` if needed
+    ```
+    NAME=TidalSpringBootApp
+    SERVER_PORT=80
+    ```
+2. Run the following commands from this directory
+    ```
+    $ docker-compose up -d
+    ```
+3. Run following command to validate application response:
+    1. Check container status
+        ```
+        $ docker-compose ps
+        ```
+        **Expected output**
+        
+        | Name                | Command                            | State | Ports                |
+        |---------------------|------------------------------------|-------|----------------------|
+        | spring-boot-web-app | java -jar gs-spring-boot-0.1.0.jar | Up    | 80/tcp               |
+        | web-server          | nginx -g daemon off;               | Up    | 0.0.0.0:8080->80/tcp |
+        
+    2. Check application status  
+        ```
+        $  curl -X GET http://0.0.0.0:8080/
+        ```
+        **Expected output**
+        `Hello TidalSpringBootApp from Tidal!`
