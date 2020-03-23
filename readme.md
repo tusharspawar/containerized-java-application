@@ -1,7 +1,7 @@
 ## Containerized Java Application with Nginx
 
 * **Java Spring Boot application container** uses `oracle/openjdk:8` docker image to build an image to run Java 1.8 and runs and exposes port 80 by default if no port is supplied in SERVER_PORT environment variable
-* **Nginx container** uses `nginx:alpine` docker image and is configured to run on port 80. The application is accessable on port 8080.
+* **Nginx container** uses `nginx:alpine` docker image and is configured to run on port 80. The application is accessible on port 8080.
 
 ### How to get up and running
 Clone the project to your host. Navigate to the directory in which you cloned the project. 
